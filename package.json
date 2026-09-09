@@ -1,0 +1,19 @@
+{
+  "name": "zapcondo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portaria web e API dos moradores do ZapCondo",
+  "scripts": {
+    "start": "node server/server.js",
+    "start:portaria": "node server/server.js",
+    "start:moradores": "node server/moradores-server.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc14",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "nodemailer": "^6.9.16",
+    "pino": "^9.6.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

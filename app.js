@@ -1,0 +1,1 @@
+// Arquivo arquivado em legado/app.js

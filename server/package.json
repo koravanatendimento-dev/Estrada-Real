@@ -1,0 +1,19 @@
+{
+  "name": "zapcondo-server",
+  "version": "1.0.0",
+  "description": "Servidor backend de notificações WhatsApp e E-mail - Condomínio Estrada Real",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:portaria": "node server.js",
+    "start:moradores": "node moradores-server.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc14",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "nodemailer": "^6.9.16",
+    "pino": "^9.6.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

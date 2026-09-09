@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#166534">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css?v=4">
+  <title>Estrada Real - Morador</title>
+</head>
+<body>
+  <main class="app-shell">
+    <section id="auth-view" class="auth-view">
+      <img class="brand-logo" src="/assets/images/background.jpg" alt="Condomínio Estrada Real">
+      <h1>Área do Morador</h1>
+      <p class="muted">Acesse suas encomendas e reserve o Espaço Gourmet.</p>
+      <div id="login-panel">
+        <form id="login-form">
+          <input id="login-identifier" placeholder="CPF ou e-mail" required>
+          <input id="login-password" type="password" placeholder="Senha" required>
+          <button class="primary">Entrar</button>
+        </form>
+        <button id="register-tab" class="secondary-action" type="button">Ainda não tenho cadastro</button>
+      </div>
+      <div id="register-panel" class="is-hidden">
+        <button id="login-tab" class="back-action" type="button">← Voltar para entrar</button>
+        <h2>Criar cadastro</h2>
+        <p class="muted">Preencha seus dados para criar seu acesso individual.</p>
+        <form id="register-form">
+        <input id="register-name" placeholder="Nome completo" required>
+        <input id="register-cpf" placeholder="CPF" required>
+        <input id="register-email" type="email" placeholder="E-mail" required>
+        <input id="register-phone" placeholder="Telefone" required>
+        <input id="register-rg" placeholder="RG (opcional)">
+        <input id="register-birth-date" type="date" aria-label="Data de nascimento (opcional)">
+        <input id="register-emergency-contact" placeholder="Contato de emergência (opcional)">
+        <input id="register-emergency-phone" placeholder="Telefone de emergência (opcional)">
+        <select id="register-unit" required><option value="">Selecione bloco e apartamento</option></select>
+        <input id="register-photo" type="file" accept="image/*" capture="user" required>
+        <input id="register-password" type="password" placeholder="Crie uma senha (mínimo 6 caracteres)" minlength="6" required>
+        <input id="register-password-confirm" type="password" placeholder="Confirme a senha" minlength="6" required>
+          <button class="primary">Criar cadastro</button>
+        </form>
+      </div>
+      <p id="auth-message" class="message"></p>
+    </section>
+
+    <section id="app-view" hidden>
+      <header class="topbar"><div><strong>Estrada Real</strong><small id="resident-summary"></small></div><button id="logout" class="link-button">Sair</button></header>
+      <nav class="tabs"><button data-screen="parcels" class="active">Encomendas</button><button data-screen="reservations">Espaço Gourmet</button><button data-screen="notifications">Notificações</button></nav>
+      <section id="parcels-screen" class="screen"></section>
+      <section id="reservations-screen" class="screen" hidden></section>
+      <section id="notifications-screen" class="screen" hidden></section>
+    </section>
+  </main>
+  <script src="app.js?v=5"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+{
+  "residents": [
+    {
+      "id": "resident_d8d9de94-236b-4ea8-8cdc-7be37c31f853",
+      "name": "Morador Teste",
+      "cpf": "999678843910",
+      "email": "teste999678843910@example.com",
+      "phone": "31999999999",
+      "unit": "101 (BLOCO 01)",
+      "rg": "",
+      "birthDate": "",
+      "emergencyContact": "",
+      "emergencyPhone": "",
+      "passwordHash": "7c72ed86d2f3f24ee3880d162487d106:f8fe14a343db7efb31f2cc1e22d271a3fa30b2480a6c4d15aa5fa3ed6b11926abbd16978f1792872c50a45817ed46fd39ed0f432707383feb8a2a4feda54fd20",
+      "createdAt": "2026-09-09T12:16:18.971Z"
+    },
+    {
+      "id": "resident_696ed92a-f87d-4b21-9fa8-da6779672584",
+      "name": "DOUGLAS RIBEIRO",
+      "cpf": "35883450865",
+      "email": "douglas.ribeiro86@yahoo.com.br",
+      "phone": "31984708652",
+      "unit": "101 (BLOCO 01)",
+      "rg": "",
+      "birthDate": "1990-03-26",
+      "emergencyContact": "",
+      "emergencyPhone": "",
+      "passwordHash": "6a9820b71d14c5c77661e48a725d6516:e7b3cc55e26356c85770becc18fafdb90c0ec48db99014a4b386883130fe172132da822291d52850a745a379e5b9692f0081f08babcdab76b34f5f3140903b4d",
+      "createdAt": "2026-09-09T12:34:16.773Z"
+    },
+    {
+      "id": "resident_b461d8a6-1f72-40c9-ad8b-aebbb580196b",
+      "name": "Douglas Ribeiro",
+      "cpf": "08617956607",
+      "email": "ribeirodouglas247@yahoo.com",
+      "phone": "31984708652",
+      "unit": "101 (BLOCO 02)",
+      "rg": "",
+      "birthDate": "1990-03-26",
+      "emergencyContact": "",
+      "emergencyPhone": "",
+      "passwordHash": "d29091499534856bb16a90d3acc77d95:65194073ba8b4d1040f0c3b7402919516a48b3435d01b4c69a1f2af77b4cbec2cdc5d1b9023c1efbf1b50552872c8f5a61c99ed8c0f0e7d5fc1b1a912c79bb5c",
+      "createdAt": "2026-09-09T13:05:24.269Z"
+    }
+  ],
+  "sessions": [
+    {
+      "token": "08724a04bf88e6a90540325ccfb5a696090f4ac46931fc90637185c4e571b6da",
+      "residentId": "resident_d8d9de94-236b-4ea8-8cdc-7be37c31f853",
+      "createdAt": "2026-09-09T12:16:18.973Z"
+    },
+    {
+      "token": "8e0717472fb5568975b026a59c354f524320434c8254e09e43b0d7b2cf51986b",
+      "residentId": "resident_d8d9de94-236b-4ea8-8cdc-7be37c31f853",
+      "createdAt": "2026-09-09T12:16:19.153Z"
+    },
+    {
+      "token": "15351068ec988c67d71cfac3aed5a8866c193f2153c855c6419a3825cc5a4403",
+      "residentId": "resident_d8d9de94-236b-4ea8-8cdc-7be37c31f853",
+      "createdAt": "2026-09-09T12:31:27.104Z"
+    },
+    {
+      "token": "ddfe81ef63a9733891ce334a0770b9c782694a844c0daef86461c532ca007793",
+      "residentId": "resident_d8d9de94-236b-4ea8-8cdc-7be37c31f853",
+      "createdAt": "2026-09-09T12:32:23.114Z"
+    },
+    {
+      "token": "73dbae2f0d26cef5bbbbabe33492d5c4c4f6d7c18202d018acf8ce08d6b987dd",
+      "residentId": "resident_696ed92a-f87d-4b21-9fa8-da6779672584",
+      "createdAt": "2026-09-09T12:34:16.773Z"
+    },
+    {
+      "token": "42b2eabee81394edba3016156fecd8bafdd042995aa9e5c2cd73cc58f2762d2d",
+      "residentId": "resident_696ed92a-f87d-4b21-9fa8-da6779672584",
+      "createdAt": "2026-09-09T12:56:30.060Z"
+    },
+    {
+      "token": "95a9671cf1a5a598c8c6e5d94f831e8e34c9724231e11356ca340ec44ffc8e60",
+      "residentId": "resident_b461d8a6-1f72-40c9-ad8b-aebbb580196b",
+      "createdAt": "2026-09-09T13:05:24.269Z"
+    },
+    {
+      "token": "f6337e7a95b75eb7ef44816a7225a9a29f6bbc25da5a18f0d165821883b52e07",
+      "residentId": "resident_696ed92a-f87d-4b21-9fa8-da6779672584",
+      "createdAt": "2026-09-09T15:54:17.902Z"
+    }
+  ],
+  "parcels": [
+    {
+      "id": "parcel_dac23f43-3288-4fe9-a141-9fcc7dd09549",
+      "unit": "101 (BLOCO 02)",
+      "residentId": "resident_b461d8a6-1f72-40c9-ad8b-aebbb580196b",
+      "dest": "Douglas Ribeiro",
+      "code": "ZAP-8037143",
+      "protocolo": "PRT-20260909-180372",
+      "tipo": "Pacote",
+      "carrier": "Shopee",
+      "date": "09/09/2026, 10:06:20",
+      "anotacoes": "",
+      "status": "Pendente"
+    },
+    {
+      "id": "parcel_c1e45eec-fc27-48e8-a97e-f22eb3f1bd33",
+      "unit": "101 (BLOCO 01)",
+      "residentId": "resident_696ed92a-f87d-4b21-9fa8-da6779672584",
+      "dest": "DOUGLAS RIBEIRO",
+      "code": "ZAP-7743062",
+      "protocolo": "PRT-20260909-177433",
+      "tipo": "Caixa",
+      "carrier": "Shopee",
+      "date": "09/09/2026, 09:49:37",
+      "anotacoes": "",
+      "status": "Pendente"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notification_5e0afca8-73b0-4bbd-b14a-dc4b70a8d3dd",
+      "residentId": "resident_696ed92a-f87d-4b21-9fa8-da6779672584",
+      "type": "acesso",
+      "title": "Nova visita registrada na sua unidade",
+      "message": "Visitante Teste - Entrada Visitante.",
+      "createdAt": "2026-09-09T13:16:11.496Z",
+      "read": false
+    },
+    {
+      "id": "notification_babf4b28-c59d-4152-be25-fb3c9018581f",
+      "residentId": "resident_d8d9de94-236b-4ea8-8cdc-7be37c31f853",
+      "type": "acesso",
+      "title": "Nova visita registrada na sua unidade",
+      "message": "Visitante Teste - Entrada Visitante.",
+      "createdAt": "2026-09-09T13:16:11.496Z",
+      "read": false
+    },
+    {
+      "id": "notification_cef476c6-ffd4-44f0-a438-3bb6e6221f98",
+      "residentId": "resident_b461d8a6-1f72-40c9-ad8b-aebbb580196b",
+      "type": "encomenda",
+      "title": "Nova encomenda na portaria",
+      "message": "Código de retirada: ZAP-8037143. Protocolo: PRT-20260909-180372.",
+      "parcelId": "parcel_dac23f43-3288-4fe9-a141-9fcc7dd09549",
+      "createdAt": "2026-09-09T13:06:20.395Z",
+      "read": false
+    },
+    {
+      "id": "notification_91a575a9-dfd4-4aa3-b744-ea0c36dcf2e6",
+      "residentId": "resident_696ed92a-f87d-4b21-9fa8-da6779672584",
+      "type": "encomenda",
+      "title": "Nova encomenda na portaria",
+      "message": "Código de retirada: ZAP-7743062. Protocolo: PRT-20260909-177433.",
+      "parcelId": "parcel_c1e45eec-fc27-48e8-a97e-f22eb3f1bd33",
+      "createdAt": "2026-09-09T12:49:37.579Z",
+      "read": false
+    }
+  ],
+  "reservations": []
+}
