@@ -55,12 +55,11 @@ async function processarFotoIA() {
   const dataUrl = canvas.toDataURL('image/png');
 
   try {
-    if (typeof Tesseract === 'undefined') {
-      throw new Error("Biblioteca Tesseract.js não carregada.");
+    let textoLido = '';
+    if (typeof Tesseract !== 'undefined') {
+      const result = await Tesseract.recognize(dataUrl, 'por', { logger: m => console.log(m) });
+      textoLido = result.data.text;
     }
-
-    const result = await Tesseract.recognize(dataUrl, 'por', { logger: m => console.log(m) });
-    const textoLido = result.data.text;
 
     fecharModalCameraIA();
 
@@ -79,7 +78,7 @@ async function processarFotoIA() {
       imgPreview.style.display = 'block';
     }
 
-    extrairEPreencherDadosIA(textoLido);
+    if (textoLido) extrairEPreencherDadosIA(textoLido);
 
   } catch (err) {
     if (statusEl) statusEl.style.display = 'none';
@@ -188,5 +187,6 @@ window.processarFotoIA = processarFotoIA;
 window.extrairEPreencherDadosIA = extrairEPreencherDadosIA;
 window.selecionarTransportadoraPorNome = selecionarTransportadoraPorNome;
 window.ligarCamera = ligarCamera;
+window.tirarFoto = tirarFoto;
 window.tirarFoto = tirarFoto;
 window.desligarCamera = desligarCamera;
