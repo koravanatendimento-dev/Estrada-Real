@@ -14,3 +14,10 @@ services:
           type: web
           name: estrada-real-moradores
           property: host
+  - type: web
+    name: estrada-real-portaria
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/portaria-server.js
+    healthCheckPath: /status
