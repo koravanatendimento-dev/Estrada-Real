@@ -2,6 +2,7 @@ console.log("=== SERVIDOR WHATSAPP E E-MAIL - ESTRADA REAL ===");
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const whatsappService = require('./services/whatsappService');
 const emailService = require('./services/emailService');
 const apiStore = require('./apiStore');
@@ -10,6 +11,10 @@ const createMoradoresApi = require('./moradoresApi');
 const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json({ limit: '10mb' }));
+app.use('/moradores', express.static(path.join(__dirname, '..', 'morador-app')));
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'index.html')));
+app.get('/moradores', (req, res) => res.sendFile(path.join(__dirname, '..', 'morador-app', 'index.html')));
 
 function requireResident(req, res, next) {
     const authorization = req.headers.authorization || '';
@@ -312,8 +317,8 @@ app.get('/status', (req, res) => {
     });
 });
 
-const PORT = 3001;
-app.listen(PORT, () => {
+const PORT = Number(process.env.PORT || process.env.PORTARIA_API_PORT || 3001);
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Servidor backend rodando na porta ${PORT}!`);
     console.log(`Rotas ativas:`);
     console.log(`• POST http://localhost:${PORT}/enviar-whatsapp`);
