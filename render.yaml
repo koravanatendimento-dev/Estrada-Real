@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: estrada-real-moradores
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/moradores-server.js
+    healthCheckPath: /status
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUBLIC_APP_URL
+        fromService:
+          type: web
+          name: estrada-real-moradores
+          property: host

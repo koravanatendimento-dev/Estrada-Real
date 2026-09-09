@@ -38,7 +38,7 @@ app.get('/compartilhar', (req, res) => {
 });
 app.use('/api/moradores', createMoradoresApi({ apiStore, requireResident }));
 
-const port = Number(process.env.MORADORES_API_PORT || 3002);
-app.listen(port, () => {
+const port = Number(process.env.PORT || process.env.MORADORES_API_PORT || 3002);
+app.listen(port, '0.0.0.0', () => {
     console.log(`API dos moradores disponível na porta ${port}.`);
 });
