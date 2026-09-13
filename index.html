@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Biblioteca Tesseract.js para leitura de etiquetas via IA -->
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -261,7 +262,7 @@
         <div class="mb-3" style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button class="btn btn-success" onclick="exibirFormularioEncomenda()" style="background: #22c55e;"><i class="fa-solid fa-plus"></i> + Nova encomenda</button>
             <button class="btn btn-primary" onclick="abrirTelaRegistrarIA()" style="background: #3b82f6;"><i class="fa-solid fa-robot"></i> Registrar com IA</button>
-            <button class="btn btn-primary" style="background: #0284c7;"><i class="fa-solid fa-qrcode"></i> Entregar com QR Code</button>
+            <button class="btn btn-primary" onclick="iniciarEntregaPorQr()" style="background: #0284c7;"><i class="fa-solid fa-qrcode"></i> Entregar com QR Code</button>
             <button class="btn btn-secondary" style="background: #94a3b8;"><i class="fa-solid fa-video"></i> Vídeo</button>
         </div>
 
@@ -271,12 +272,6 @@
                 <span style="font-size: 0.85rem; font-weight: bold; color: #64748b; text-transform: uppercase;">Aguardando Retirada</span>
             </div>
             <div id="container-chips-aguardando" style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;"></div>
-        </div>
-        <div class="panel-section" style="border: 1px solid #e2e8f0; background: #fff;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                <span style="font-size:0.85rem; font-weight:bold; color:#64748b; text-transform:uppercase;">Histórico de encomendas</span>
-            </div>
-            <div id="container-cards-encomendas"></div>
         </div>
     </div>
 

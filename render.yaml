@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: estrada-real-moradores
+    name: estrada-real
     runtime: node
     plan: free
     buildCommand: npm install
-    startCommand: node server/moradores-server.js
+    startCommand: node server/server.js
     healthCheckPath: /status
     envVars:
       - key: NODE_ENV
@@ -12,12 +12,5 @@ services:
       - key: PUBLIC_APP_URL
         fromService:
           type: web
-          name: estrada-real-moradores
+          name: estrada-real
           property: host
-  - type: web
-    name: estrada-real-portaria
-    runtime: node
-    plan: free
-    buildCommand: npm install
-    startCommand: node server/portaria-server.js
-    healthCheckPath: /status

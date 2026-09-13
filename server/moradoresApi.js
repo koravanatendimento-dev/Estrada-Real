@@ -116,6 +116,43 @@ function createMoradoresApi({ apiStore, requireResident }) {
         return res.status(201).json({ success: true, reserva: reservation });
     });
 
+    router.get('/me/ocorrencias', requireResident, (req, res) => {
+        const occurrences = req.apiData.occurrences.filter(item => item.residentId === req.resident.id);
+        return res.json({ success: true, ocorrencias: occurrences });
+    });
+
+    router.post('/me/ocorrencias', requireResident, (req, res) => {
+        const title = normalizeText(req.body.title);
+        const type = normalizeText(req.body.type) || 'Outro';
+        const description = normalizeText(req.body.description);
+        if (!title || !description) return res.status(400).json({ success: false, error: 'Informe o título e a descrição da ocorrência.' });
+        const data = req.apiData;
+        const occurrence = {
+            id: apiStore.id('occurrence'),
+            residentId: req.resident.id,
+            residentName: req.resident.name,
+            unit: req.resident.unit,
+            title,
+            type,
+            description,
+            status: 'Aberta',
+            createdAt: new Date().toISOString()
+        };
+        data.occurrences.unshift(occurrence);
+        data.notifications.unshift({
+            id: apiStore.id('notification'),
+            residentId: req.resident.id,
+            type: 'ocorrencia',
+            title: 'Ocorrência registrada',
+            message: `Sua ocorrência "${title}" foi enviada para a portaria.`,
+            occurrenceId: occurrence.id,
+            createdAt: new Date().toISOString(),
+            read: false
+        });
+        apiStore.writeData(data);
+        return res.status(201).json({ success: true, ocorrencia: occurrence });
+    });
+
     return router;
 }
 

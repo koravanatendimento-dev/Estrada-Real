@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#166534"/>
+  <path d="M86 242 256 92l170 150v168H86z" fill="#f2f7f1"/>
+  <path d="M122 248h268v126H122z" fill="#cfe5cd"/>
+  <path d="M162 214h188v34H162zM192 164h128v34H192z" fill="#166534"/>
+  <text x="256" y="438" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="700" fill="#fff">ESTRADA REAL</text>
+</svg>

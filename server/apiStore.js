@@ -9,7 +9,8 @@ const EMPTY_DATA = {
     sessions: [],
     parcels: [],
     notifications: [],
-    reservations: []
+    reservations: [],
+    occurrences: []
 };
 
 function ensureDataFile() {
@@ -21,7 +22,24 @@ function ensureDataFile() {
 function readData() {
     ensureDataFile();
     const parsed = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-    return { ...EMPTY_DATA, ...parsed };
+    const data = { ...EMPTY_DATA, ...parsed };
+    let changed = false;
+    data.parcels = data.parcels.map(parcel => {
+        if (!/^[A-Z0-9]{6}$/.test(String(parcel.code || '').toUpperCase())) {
+            parcel.code = randomParcelCode();
+            changed = true;
+        } else {
+            parcel.code = String(parcel.code).toUpperCase();
+        }
+        return parcel;
+    });
+    if (changed) writeData(data);
+    return data;
+}
+
+function randomParcelCode() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    return Array.from({ length: 6 }, () => chars[crypto.randomInt(chars.length)]).join('');
 }
 
 function writeData(data) {

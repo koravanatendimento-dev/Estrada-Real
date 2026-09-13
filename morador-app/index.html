@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#166534">
   <link rel="manifest" href="/moradores/manifest.webmanifest">
-  <link rel="stylesheet" href="/moradores/style.css?v=5">
+  <link rel="stylesheet" href="/moradores/style.css?v=6">
   <title>Estrada Real - Morador</title>
 </head>
 <body>
@@ -47,12 +47,13 @@
 
     <section id="app-view" hidden>
       <header class="topbar"><div><strong>Estrada Real</strong><small id="resident-summary"></small></div><button id="logout" class="link-button">Sair</button></header>
-      <nav class="tabs"><button data-screen="parcels" class="active">Encomendas</button><button data-screen="reservations">Espaço Gourmet</button><button data-screen="notifications">Notificações</button></nav>
+      <nav class="tabs"><button data-screen="parcels" class="active">Encomendas</button><button data-screen="reservations">Espaço Gourmet</button><button data-screen="occurrences">Ocorrências</button><button data-screen="notifications">Notificações</button></nav>
       <section id="parcels-screen" class="screen"></section>
       <section id="reservations-screen" class="screen" hidden></section>
+      <section id="occurrences-screen" class="screen" hidden></section>
       <section id="notifications-screen" class="screen" hidden></section>
     </section>
   </main>
-  <script src="/moradores/app.js?v=5"></script>
+  <script src="/moradores/app.js?v=6"></script>
 </body>
 </html>

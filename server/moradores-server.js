@@ -9,6 +9,7 @@ const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname, '..', 'morador-app')));
+app.use('/moradores', express.static(path.join(__dirname, '..', 'morador-app')));
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
 function requireResident(req, res, next) {
@@ -26,6 +27,8 @@ function requireResident(req, res, next) {
 
 app.get('/status', (req, res) => res.json({ online: true, service: 'moradores-api' }));
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'morador-app', 'index.html')));
+app.get('/moradores', (req, res) => res.redirect('/moradores/'));
+app.get('/moradores/', (req, res) => res.sendFile(path.join(__dirname, '..', 'morador-app', 'index.html')));
 app.get('/download', (req, res) => {
     const zipPath = path.join(__dirname, '..', 'aplicativo-moradores-estrada-real-atualizado.zip');
     if (!fs.existsSync(zipPath)) return res.status(404).send('Pacote do aplicativo ainda não foi gerado.');

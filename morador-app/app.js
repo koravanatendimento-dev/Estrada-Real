@@ -18,7 +18,7 @@ async function showApp(resident) {
   state.resident = resident; $('auth-view').hidden=true; $('app-view').hidden=false;
   $('resident-summary').textContent=`${resident.name} · ${resident.unit}`;
   try {
-    await Promise.all([loadParcels(), loadReservations(), loadNotifications()]);
+    await Promise.all([loadParcels(), loadReservations(), loadOccurrences(), loadNotifications()]);
   } catch (error) {
     $('parcels-screen').innerHTML=`<h2>Minhas encomendas</h2><p class="message">${error.message}</p>`;
   }
@@ -44,6 +44,21 @@ async function loadReservations() {
   $('reservation-form').addEventListener('submit',async event=>{event.preventDefault();const guests=$('reservation-guests').value.split('\n').map(v=>v.trim()).filter(Boolean);try{await request('/api/moradores/me/reservas',{method:'POST',body:JSON.stringify({date:$('reservation-date').value,guests})});loadReservations();}catch(error){$('reservation-message').textContent=error.message;}});
 }
 async function loadNotifications() { const data=await request('/api/moradores/me/notificacoes'); $('notifications-screen').innerHTML='<h2>Notificações</h2>'; if(!data.notificacoes.length)$('notifications-screen').innerHTML+='<p class="muted">Nenhuma notificação.</p>'; data.notificacoes.forEach(item=>{$('notifications-screen').innerHTML+=`<article class="card"><h3>${item.title}</h3><p>${item.message}</p><small>${item.createdAt}</small></article>`;}); }
+async function loadOccurrences() {
+  const data=await request('/api/moradores/me/ocorrencias');
+  $('occurrences-screen').innerHTML='<h2>Ocorrências do condomínio</h2><p class="muted">Informe problemas, manutenção ou situações que precisam da portaria.</p><form id="occurrence-form"><select id="occurrence-type" required><option value="">Tipo de ocorrência</option><option>Barulho / perturbação</option><option>Vazamento / infiltração</option><option>Falha de iluminação</option><option>Elevador</option><option>Portão / acesso</option><option>Manutenção</option><option>Outro</option></select><input id="occurrence-title" placeholder="Título ou resumo" required><textarea id="occurrence-description" rows="4" placeholder="Descreva a ocorrência" required></textarea><button class="primary">Enviar ocorrência</button><p id="occurrence-message" class="message"></p></form><h3>Minhas solicitações</h3>';
+  if(!data.ocorrencias.length) $('occurrences-screen').innerHTML+='<p class="muted">Nenhuma ocorrência registrada.</p>';
+  data.ocorrencias.forEach(item=>{ $('occurrences-screen').innerHTML+=`<article class="card"><h3>${item.title}</h3><span class="badge">${item.status}</span><p>${item.type}</p><p>${item.description}</p><small>${new Date(item.createdAt).toLocaleString('pt-BR')}</small></article>`; });
+  $('occurrence-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    const message = $('occurrence-message');
+    try {
+      await request('/api/moradores/me/ocorrencias', { method:'POST', body:JSON.stringify({ type:$('occurrence-type').value, title:$('occurrence-title').value, description:$('occurrence-description').value }) });
+      await loadOccurrences();
+      message.textContent = 'Ocorrência enviada para a portaria.';
+    } catch (error) { message.textContent = error.message; }
+  });
+}
 $('login-tab').onclick=()=>{$('login-panel').classList.remove('is-hidden');$('register-panel').classList.add('is-hidden');showMessage('');};
 $('register-tab').onclick=()=>{$('login-panel').classList.add('is-hidden');$('register-panel').classList.remove('is-hidden');showMessage('');};
 $('login-form').onsubmit=async e=>{e.preventDefault();try{await login($('login-identifier').value,$('login-password').value);}catch(error){showMessage(error.message);}};
@@ -51,5 +66,5 @@ $('register-form').onsubmit=async e=>{e.preventDefault();try{await register();}c
 $('logout').onclick=()=>{localStorage.removeItem('moradorToken');location.reload();};
 document.querySelectorAll('.tabs button').forEach(button=>button.onclick=()=>{document.querySelectorAll('.tabs button').forEach(item=>item.classList.remove('active'));document.querySelectorAll('.screen').forEach(item=>item.hidden=true);button.classList.add('active');$(`${button.dataset.screen}-screen`).hidden=false;});
 populateUnits();
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/moradores/sw.js', { scope: '/moradores/' });
 if(state.token) request('/api/moradores/me').then(data=>showApp(data.resident)).catch(()=>{localStorage.removeItem('moradorToken');});

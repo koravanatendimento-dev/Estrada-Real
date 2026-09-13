@@ -114,11 +114,12 @@ app.get('/api/portaria/convidados/:guestQrToken', requirePortaria, (req, res) =>
 app.post('/api/portaria/encomendas', requirePortaria, async (req, res) => {
     const unit = normalizeText(req.body.unit);
     const residentName = normalizeText(req.body.dest);
-    const code = normalizeText(req.body.code);
+    const code = normalizeText(req.body.code).toUpperCase();
     const protocolo = normalizeText(req.body.protocolo);
     if (!unit || !code || !protocolo) {
         return res.status(400).json({ success: false, error: 'Unidade, código e protocolo são obrigatórios.' });
     }
+    if (!/^[A-Z0-9]{6}$/.test(code)) return res.status(400).json({ success: false, error: 'O código de retirada deve ter exatamente 6 letras ou números.' });
     const data = apiStore.readData();
     let resident = data.residents.find(item => item.unit === unit && item.name.toLowerCase() === residentName.toLowerCase())
         || data.residents.find(item => item.unit === unit && (
@@ -142,7 +143,7 @@ app.post('/api/portaria/encomendas', requirePortaria, async (req, res) => {
         resident.phone = resident.phone || normalizeText(req.body.phone);
     }
     const parcel = {
-        id: apiStore.id('parcel'),
+        id: req.body.id || apiStore.id('parcel'),
         unit,
         residentId: resident?.id || null,
         dest: residentName,
@@ -191,6 +192,29 @@ app.post('/api/portaria/acessos', requirePortaria, (req, res) => {
     moradores.forEach(resident => data.notifications.unshift(buildAccessNotification(req.body, resident)));
     apiStore.writeData(data);
     return res.status(201).json({ success: true, notificacoes: moradores.length });
+});
+
+app.get('/api/portaria/ocorrencias', requirePortaria, (req, res) => {
+    const data = apiStore.readData();
+    return res.json({ success: true, ocorrencias: data.occurrences });
+});
+app.post('/api/portaria/ocorrencias', requirePortaria, (req, res) => {
+    const data = apiStore.readData();
+    const occurrence = {
+        id: apiStore.id('occurrence'),
+        residentId: null,
+        residentName: 'Portaria',
+        unit: normalizeText(req.body.unit),
+        title: normalizeText(req.body.title),
+        type: normalizeText(req.body.type) || 'Outro',
+        description: normalizeText(req.body.description || req.body.desc),
+        status: 'Aberta',
+        createdAt: new Date().toISOString()
+    };
+    if (!occurrence.title || !occurrence.description) return res.status(400).json({ success: false, error: 'Título e descrição são obrigatórios.' });
+    data.occurrences.unshift(occurrence);
+    apiStore.writeData(data);
+    return res.status(201).json({ success: true, ocorrencia: occurrence });
 });
 
 // Inicia conexão do WhatsApp

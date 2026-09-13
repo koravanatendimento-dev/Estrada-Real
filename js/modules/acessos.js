@@ -28,7 +28,8 @@ function configurarFormularioAcessos() {
     const lista = DB.get('access');
     lista.push(access);
     DB.set('access', lista);
-    fetch('http://localhost:3001/api/portaria/acessos', {
+    const portariaApi = window.PORTARIA_API_BASE || (location.protocol === 'file:' ? 'http://localhost:3001' : location.origin);
+    fetch(`${portariaApi}/api/portaria/acessos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(access)

@@ -23,7 +23,8 @@ function exibirListaMoradores() {
 
 async function sincronizarMoradoresApi() {
     try {
-      const resposta = await fetch('http://localhost:3001/api/portaria/moradores');
+      const portariaApi = window.PORTARIA_API_BASE || (location.protocol === 'file:' ? 'http://localhost:3001' : location.origin);
+      const resposta = await fetch(`${portariaApi}/api/portaria/moradores`);
       if (!resposta.ok) throw new Error(`API de moradores respondeu ${resposta.status}.`);
       const dados = await resposta.json();
       const locais = DB.get('people');
@@ -117,7 +118,8 @@ function configurarFormularioMorador() {
     };
     lista.push(morador);
     DB.set('people', lista);
-    fetch('http://localhost:3001/api/portaria/moradores', {
+    const portariaApi = window.PORTARIA_API_BASE || (location.protocol === 'file:' ? 'http://localhost:3001' : location.origin);
+    fetch(`${portariaApi}/api/portaria/moradores`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(morador)
